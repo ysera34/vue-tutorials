@@ -1,0 +1,28 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<div id="app-1">
+  <p v-if="seen">Now you see me</p>
+  <a v-bind:href="url">vuejs</a>
+  <a v-on:click="doSomething"> ... </a>
+  <div>
+    <form v-on:submit.prevent="onSubmit">
+      <input type="submit" value="submit"/>
+    </form>
+  </div>
+</div>
+<script>
+var app1 = new Vue({
+  el: '#app-1',
+  data: {
+    seen: true,
+    url: 'vuejs.org'
+  },
+  methods: {
+    doSomething: function() {
+      console.log('doSomething clicked')
+    },
+    onSubmit: function() {
+      console.log('onSubmit submit')
+    }
+  }
+})
+</script>
