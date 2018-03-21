@@ -1,0 +1,50 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<div id="app-1">
+  <span>Message: {{ msg }}</span>
+  <br>
+  <span v-once>This will never change: {{ msg }}</span>
+</div>
+<div id="app-2">
+  <p>Using mustaches: {{ rawHtml }}</p>
+  <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+</div>
+<div id="app-3">
+  <div v-bind:id="dynamicId"></div>
+  <button v-bind:disabled="isButtonDisabled"></button>
+</div>
+<div id="app-4">
+  <div>{{ number + 1 }}</div>
+  <div>{{ ok ? 'YES' : 'NO' }}</div>
+  <div>{{ message.split('').reverse().join('') }}</div>
+  <div v-bind:id="'list-' + id"></div>
+</div>
+<script>
+var app1 = new Vue({
+  el: '#app-1',
+  data: {
+    msg: 'sample message'
+  }
+})
+var app2 = new Vue({
+  el: '#app-2',
+  data: {
+    rawHtml: '<span style="color: red">The should be red.</span>'
+  }
+})
+var app3 = new Vue({
+  el: '#app-3',
+  data: {
+    dynamicId: 1,
+    isButtonDisabled: true
+  }
+})
+var app4 = new Vue({
+  el: '#app-4',
+  data: {
+    number: 1,
+    ok: true,
+    message: 'Hello Vue!',
+    id: 10
+  }
+})
+</script>
