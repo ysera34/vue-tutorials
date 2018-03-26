@@ -1,0 +1,115 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<div id="app-1">
+  <h1 v-if="ok">Yes</h1>
+  <h1 v-else>No</h1>
+</div>
+<div id="app-2">
+  <!-- Conditional Groups with v-if on <template> -->
+  <template v-if="ok">
+    <h1>Title</h1>
+    <p>Paragraph 1</p>
+    <p>Paragraph 2</p>
+  </template>
+</div>
+<div id="app-3">
+  <div v-if="Math.random() > 0.5">
+    Now you see me
+  </div>
+  <div v-else>
+    Now you don't
+  </div>
+</div>
+<div id="app-4">
+  <div v-if="type === 'A'">
+    A
+  </div>
+  <div v-else-if="type === 'B'">
+    B
+  </div>
+  <div v-else-if="type === 'C'">
+    C
+  </div>
+  <div v-else>
+    Not A/B/C
+  </div>
+</div>
+<div id="app-5">
+  <template v-if="loginType === 'username'">
+    <label>Username</label>
+    <input placeholder="Enter your username">
+  </template>
+  <template v-else>
+    <label>Email</label>
+    <input placeholder="Enter your email address">
+  </template>
+  <button v-on:click="toggle">Toggle login type</button>
+</div>
+<div id="app-6">
+  <template v-if="loginType === 'username'">
+    <label>Username</label>
+    <input placeholder="Enter your username" key="username-input">
+  </template>
+  <template v-else>
+    <label>Email</label>
+    <input placeholder="Enter your email address" key="email-input">
+  </template>
+  <button v-on:click="toggle">Toggle login type</button>
+</div>
+<script>
+var app1 = new Vue({
+  el: '#app-1',
+  data: {
+    ok: true
+  }
+})
+var app2 = new Vue({
+  el: '#app-2',
+  data: {
+    ok: true
+  }
+})
+var app3 = new Vue({
+  el: '#app-3',
+  data: {
+
+  }
+})
+var app4 = new Vue({
+  el: '#app-4',
+  data: {
+    type: 'A'
+  }
+})
+var app5 = new Vue({
+  el: '#app-5',
+  data: {
+    loginType: 'username'
+  },
+  methods: {
+    toggle: function() {
+      console.log(this.loginType);
+      if (this.loginType === 'username') {
+        this.loginType = 'email';
+      } else {
+        this.loginType = 'username';
+      }
+    }
+  }
+})
+var app6 = new Vue({
+  el: '#app-6',
+  data: {
+    loginType: 'username'
+  },
+  methods: {
+    toggle: function() {
+      console.log(this.loginType);
+      if (this.loginType === 'username') {
+        this.loginType = 'email';
+      } else {
+        this.loginType = 'username';
+      }
+    }
+  }
+})
+</script>
