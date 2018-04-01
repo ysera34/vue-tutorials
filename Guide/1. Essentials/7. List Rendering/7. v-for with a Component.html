@@ -1,0 +1,81 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<div id="app-1">
+  <ul>
+    <my-component
+      v-for="(item, index) in items"
+      v-bind:todo="item"
+      v-bind:index="index"
+      v-bind:key="item.id">
+    </my-component>
+  </ul>
+</div>
+<div id="app-2">
+  <input
+    v-model="newTodoText"
+    v-on:keyup.enter="addNewTodo"
+    placeholder="Add a todo"
+  >
+  <ul>
+    <li
+      is="todo-item"
+      v-for="(todo, index) in todos"
+      v-bind:key="todo.id"
+      v-bind:todo="todo"
+      v-on:remove="todos.splice(index, 1)"
+    >
+    </li>
+  </ul>
+</div>
+<script>
+Vue.component('my-component', {
+  props: [ 'todo' ],
+  template: '<li>{{ todo.message }}</li>'
+})
+var app1 = new Vue({
+  el: '#app-1',
+  data: {
+    items: [
+      { id: 0, message: 'foo' },
+      { id: 1, message: 'bar' },
+      { id: 2, message: 'baz' }
+    ]
+  }
+})
+Vue.component('todo-item', {
+  props: ['todo'],
+  template: '<li>\
+    {{ todo.title }}\
+    <button v-on:click="$emit(\'remove\')">X</button>\
+  </li>'
+})
+var app2 = new Vue({
+  el: '#app-2',
+  data: {
+    newTodoText: '',
+    todos: [
+      {
+        id: 1,
+        title: 'Do the dishes',
+      },
+      {
+        id: 2,
+        title: 'Take out the trash',
+      },
+      {
+        id: 3,
+        title: 'Mow the lawn'
+      }
+    ],
+    nextTodoId: 4
+  },
+  methods: {
+    addNewTodo: function() {
+      this.todos.push({
+        id: this.nextTodoId++,
+        title: this.newTodoText
+      })
+      this.newTodoText = ''
+    }
+  }
+})
+</script>
