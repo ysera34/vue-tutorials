@@ -1,0 +1,42 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<div id="app-1">
+  <ul>
+    <li v-for="(value, key, index) in userProfile" v-bind:key="index">
+      {{ index }}. {{ key }}: {{ value }}
+    </li>
+  </ul>
+  <div>
+    <button v-on:click="setMethod1()">1</button>
+    <button v-on:click="setMethod2()">2</button>
+    <button v-on:click="setMethod3()">3</button>
+    <button v-on:click="setMethod4()">4</button>
+  </div>
+</div>
+<script>
+var app1 = new Vue({
+  el: '#app-1',
+  data: {
+    userProfile: {
+      name: 'Anika',
+      age: 27
+    }
+  },
+  methods: {
+    setMethod1 : function() {
+      Vue.set(app1.userProfile, 'height', 170)
+    },
+    setMethod2 : function() {
+      this.$set(this.userProfile, 'height', 170);
+    },
+    setMethod3 : function() {
+      this.userProfile = Object.assign({}, this.userProfile, {
+        age: 27,
+        favoriteColor: 'Vue Green'
+      })
+    },
+    setMethod4 : function() {
+
+    },
+  }
+})
+</script>
