@@ -1,0 +1,62 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<div id="app-1">
+  <!-- the click event's propagation will be stopped -->
+  <a v-on:click.stop="doThis">click.stop</a>
+
+  <!-- the submit event will no longer reload the page -->
+  <form v-on:submit.prevent="onSubmit">
+    <input type="text">
+    <button type="submit">submit.prevent</button>
+  </form>
+
+  <!-- modifiers can be chained -->
+  <a v-on:click.stop.prevent="doThat">click.stop.prevent</a>
+
+  <!-- just the modifier -->
+  <form v-on:submit.prevent>submit.prevent</form>
+
+  <!-- use capture mode when adding the event listener -->
+  <!-- i.e. an event targeting an inner element is handled here before being handled by that element -->
+  <div v-on:click.capture="doThis">click.capture</div>
+
+  <!-- only trigger handler if event.target is the element itself -->
+  <!-- i.e. not from a child element -->
+  <div v-on:click.self="doThat">click.self</div>
+
+  <div v-on:click.prevent.self>
+    <button type="button" v-on:click="doThis">click.prevent.self</button>
+  </div>
+  <div v-on:click.self.prevent>
+    <button type="button" v-on:click="doThis">click.self.prevent</button>
+  </div>
+
+  <!-- the click event will be triggered at most once -->
+  <a v-on:click.once="doThis">click.once</a>
+
+  <!-- the scroll event's default behavior (scrolling) will happen -->
+  <!-- immediately, instead of waiting for `onScroll` to complete  -->
+  <!-- in case it contains `event.preventDefault()`                -->
+  <div v-on:scroll.passive="onScroll"></div>
+</div>
+<script>
+var app1 = new Vue({
+  el: '#app-1',
+  data: {
+
+  },
+  methods: {
+    doThis: function() {
+      console.log("doThis() clicked")
+    },
+    onSubmit: function() {
+      console.log("onSubmit()")
+    },
+    doThat: function() {
+      console.log("doThat() clicked")
+    },
+    onScroll: function() {
+      console.log("scroll passive")
+    }
+  }
+})
+</script>
