@@ -1,0 +1,44 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<div id="app-1">
+  <!-- only call `vm.submit()` when the `keyCode` is 13 -->
+  <input v-on:keyup.13="submit">
+
+  <!-- same as above -->
+  <input v-on:keyup.enter="submit">
+
+  <!-- also works for shorthand -->
+  <input @keyup.enter="submit">
+
+  <input v-on:keyup.tab="submit" placeholder="tab">
+  <input v-on:keyup.delete="submit" placeholder="delete & backspace">
+  <input v-on:keyup.esc="submit" placeholder="esc">
+  <input v-on:keyup.space="submit" placeholder="space">
+  <input v-on:keyup.up="submit" placeholder="up">
+  <input v-on:keyup.down="submit" placeholder="down">
+  <input v-on:keyup.left="submit" placeholder="left">
+  <input v-on:keyup.right="submit" placeholder="right">
+
+  <input v-on:keyup.112="submit">
+
+  <!-- the handler will only be called if $event.key === 'PageDown' -->
+  <input @keyup.page-down="onPageDown" placeholder="page-down">
+</div>
+<script>
+// enable `v-on:keyup.f1`
+Vue.config.keyCodes.f1 = 112
+
+var app1 = new Vue({
+  el: '#app-1',
+  data: {
+    
+  },
+  methods: {
+    submit: function() {
+      console.log("submit()");
+    },
+    onPageDown: function(event) {
+      console.log("onPageDown()");
+    }
+  }
+})
+</script>
