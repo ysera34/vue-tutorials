@@ -1,0 +1,39 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<div id="app-1">
+  <!-- Alt + C -->
+  <input @keyup.alt.67="clear">
+
+  <!-- Ctrl + Click -->
+  <div @click.alt="doSomething">Do Something</div>
+
+  <!-- this will fire even if Alt or Shift is also pressed -->
+  <button @click.ctrl="onClick">A</button>
+
+  <!-- this will only fire when Ctrl and no other keys are pressed -->
+  <button @click.ctrl.exact="onCtrlClick">A</button>
+
+  <!-- this will only fire when no system modifiers are pressed -->
+  <button @click.exact="onClick">A</button>
+</div>
+<script>
+var app1 = new Vue({
+  el: '#app-1',
+  data: {
+
+  },
+  methods: {
+    clear: function() {
+      console.log("clear()");
+    },
+    doSomething: function() {
+      console.log("doSomething()");
+    },
+    onClick: function() {
+      console.log("onClick()");
+    },
+    onCtrlClick: function() {
+      console.log("onCtrlClick()");
+    }
+  }
+})
+</script>
