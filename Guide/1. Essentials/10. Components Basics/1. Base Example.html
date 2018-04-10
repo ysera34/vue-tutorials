@@ -1,0 +1,40 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div id="components-1">
+  <my-component></my-component>
+  <button-counter></button-counter>
+</div>
+<div id="components-2">
+  <my-component></my-component>
+  <my-component>
+    <child></child>
+  </my-component>
+</div>
+<script>
+  // Global Registration
+  Vue.component('my-component', {
+    template: '<div>custom component!!</div>'
+  })
+  Vue.component('button-counter', {
+    data: function() {
+      return {
+        count: 0
+      }
+    },
+    template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+  })
+
+  // Local Registration
+  var Child = {
+    template: '<p>local custom component!!</p>'
+  }
+
+  new Vue({
+    el: '#components-1',
+  })
+  new Vue({
+    el: '#components-2',
+    components: {
+      'my-component': Child
+    }
+  })
+</script>
