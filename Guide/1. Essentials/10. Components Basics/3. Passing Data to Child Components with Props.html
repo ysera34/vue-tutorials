@@ -1,0 +1,37 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div id="components-1">
+  <blog-post title="My journey with Vue"></blog-post>
+  <blog-post title="Blogging with Vue"></blog-post>
+  <blog-post title="Why Vue is so fun"></blog-post>
+</div>
+<div id="components-2">
+  <blog-post
+    v-for="(post, index) in posts"
+    v-bind:item="post"
+    v-bind:index="index"
+    v-bind:key="post.id"
+    v-bind:title="post.title"
+  >
+  </blog-post>
+</div>
+<script>
+  Vue.component('blog-post', {
+    props: ['title'],
+    template: '<h3>{{ title }}</h3>'
+  })
+
+  var vm1 = new Vue({
+    el: '#components-1'
+  })
+
+  var vm2 = new Vue({
+    el: '#components-2',
+    data: {
+      posts: [
+        { id: 1, title: 'My journey with Vue' },
+        { id: 2, title: 'Blogging with Vue' },
+        { id: 3, title: 'Why Vue is so fun' },
+      ]
+    }
+  })
+</script>
