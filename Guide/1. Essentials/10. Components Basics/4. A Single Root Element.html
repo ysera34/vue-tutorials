@@ -1,0 +1,62 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div id="components-1">
+  <blog-post-1
+    v-for="(post, key, index) in posts"
+    v-bind="post"
+    v-bind:index="index"
+    v-bind:key="post.id"
+  >
+  </blog-post-1>
+</div>
+<div id="components-2">
+  <blog-post-2
+    v-for="(post, index) in posts"
+    v-bind:item="post"
+    v-bind:index="index"
+    v-bind:key="post.id"
+  >
+</blog-post-2>
+</div>
+<script>
+  Vue.component('blog-post-1', {
+    props: ['id', 'title'],
+    template: '\
+      <div>\
+        <h3>{{ id }}</h3>\
+        <h4>props value: {{ title }}</h4>\
+      </div>\
+    '
+  })
+
+  var vm1 = new Vue({
+    el: '#components-1',
+    data: {
+      posts: [
+        { id: 1, title: 'My journey with Vue' },
+        { id: 2, title: 'Blogging with Vue' },
+        { id: 3, title: 'Why Vue is so fun' },
+      ]
+    }
+  })
+
+  Vue.component('blog-post-2', {
+    props: ['item'],
+    template: '\
+      <div>\
+        <h3>{{ item.id }}</h3>\
+        <h4>props value: {{ item.title }}</h4>\
+      </div>\
+    '
+  })
+
+  var vm2 = new Vue({
+    el: '#components-2',
+    data: {
+      posts: [
+        { id: 1, title: 'My journey with Vue' },
+        { id: 2, title: 'Blogging with Vue' },
+        { id: 3, title: 'Why Vue is so fun' },
+      ]
+    }
+  })
+</script>
