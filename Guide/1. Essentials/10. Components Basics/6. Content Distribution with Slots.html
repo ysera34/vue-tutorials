@@ -1,0 +1,21 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="components">
+    <alert-box>
+      Something bad happened.
+    </alert-box>
+  </div>
+</div>
+<script>
+  Vue.component('alert-box', {
+    template: `
+      <div class="demo-alert-box">
+        <strong>Error!</strong>
+        <slot></slot>
+      </div>
+    `
+  })
+  new Vue({
+    el: '#components'
+  })
+</script>
