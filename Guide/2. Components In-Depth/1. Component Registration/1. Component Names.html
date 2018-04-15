@@ -1,0 +1,31 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="my-component-1">
+    <my-component-name-1></my-component-name-1>
+  </div>
+  <div id="my-component-2">
+    <my-component-name-2></my-component-name-2>
+    <div v-html="pascalTag"></div>
+  </div>
+</div>
+<script>
+Vue.component('my-component-name-1', {
+  template: `
+    <p>my-component-kebab-case-name</p>
+  `
+})
+Vue.component('MyComponentName2', {
+  template: `
+    <p>My Component Pascal Case Name</p>
+  `
+})
+new Vue({
+  el: '#my-component-1'
+})
+new Vue({
+  el: '#my-component-2',
+  data: {
+    pascalTag: '<MyComponentName2></MyComponentName2>'
+  },
+})
+</script>
