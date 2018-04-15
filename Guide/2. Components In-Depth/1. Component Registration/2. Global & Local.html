@@ -1,0 +1,69 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="component-1">
+    <component-a>
+      <component-b></component-b>
+    </component-a>
+    <component-b></component-b>
+    <component-c></component-c>
+    <component-a v-html="component1"></component-a>
+  </div>
+  <div id="component-2">
+    <component-a>
+      <component-a></component-a>
+    </component-a>
+    <component-b>
+      <component-b></component-b>
+    </component-b>
+    <component-c>
+      <component-c></component-c>
+    </component-c>
+  </div>
+</div>
+<script>
+Vue.component('component-a', {
+  template: `
+    <p>global component a</p>
+  `
+})
+Vue.component('component-b', {
+  template: `
+    <p>global component b</p>
+  `
+})
+Vue.component('component-c', {
+  template: `
+    <p>global component c</p>
+  `
+})
+new Vue({
+  el: '#component-1',
+  data: {
+    component1: '<component-a></component-a>'
+  }
+})
+
+var ComponentA = {
+  template: `
+    <p>local component a</p>
+  `
+}
+var ComponentB = {
+  template: `
+    <p>local component b</p>
+  `
+}
+var ComponentC = {
+  template: `
+    <p>local component c</p>
+  `
+}
+new Vue({
+  el: '#component-2',
+  components: {
+    'component-a': ComponentA,
+    'component-b': ComponentB,
+    'component-c': ComponentC
+  }
+})
+</script>
