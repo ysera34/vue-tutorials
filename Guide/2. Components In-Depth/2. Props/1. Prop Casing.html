@@ -1,0 +1,22 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app">
+    <!-- kebab-case in JavaScript -->
+    <blog-post-1 post-title="hello!"></blog-post-1>
+    <blog-post-2 post-title="hello!"></blog-post-2>
+  </div>
+</div>
+<script>
+Vue.component('blog-post-1', {
+  // camelCase in JavaScript
+  props: ['postTitle'],
+  template: '<h3>{{ postTitle }}</h3>'
+})
+Vue.component('BlogPost2', {
+  props: ['postTitle'],
+  template: '<h3>{{ postTitle }}</h3>'
+})
+new Vue({
+  el: '#app'
+})
+</script>
