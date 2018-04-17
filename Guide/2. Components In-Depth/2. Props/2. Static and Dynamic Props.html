@@ -1,0 +1,110 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app-1">
+    <blog-post post="My journey with Vue"></blog-post>
+    <blog-post v-bind:post="post"></blog-post>
+    <input v-model="post">
+  </div>
+
+  <!-- Passing a Number -->
+  <div id="app-2">
+    <!-- Even though `42` is static, we need v-bind to tell Vue that -->
+    <!-- this is a JavaScript expression rather than a string. -->
+    <blog-post v-bind:likes="42"></blog-post>
+
+    <!-- Dynamically assign to the value of a variable. -->
+    <blog-post v-bind:likes="post.likes"></blog-post>
+  </div>
+
+  <!-- Passing a Boolean -->
+  <div id="app-3">
+    <!-- Including the prop with no value will imply `true`. -->
+    <blog-post favorited></blog-post>
+
+    <!-- Even though `false` is static, we need v-bind to tell Vue that -->
+    <!-- this  is a JavaScript expression rather than a string. -->
+    <base-input v-bind:favorited="false"></base-input>
+
+    <!-- Dynamically assign to the value of a variable. -->
+    <base-input v-bind:favorited="post.currentUserFavorited"></base-input>
+  </div>
+
+  <!-- Passing an Array -->
+  <div id="app-4">
+    <!-- Even though the array is static, we need v-bind to tell Vue that -->
+    <!-- this is a JavaScript expression rather than a string. -->
+    <blog-post v-bind:comment-ids="[234, 266, 273]"></blog-post>
+
+    <!-- Dynamically assign to the value of a variable. -->
+    <blog-post v-bind:comment-ids="post.commentIds"></blog-post>
+  </div>
+
+  <!-- Passing an object -->
+  <div id="app-5">
+    <!-- Even though the object is static, we need v-bind to tell Vue that -->
+    <!-- this is a JavaScript expression rather than a string.             -->
+    <blog-post v-bind:comments="{ id: 1, title: 'My Journey with Vue' }"></blog-post>
+
+    <!-- Dynamically assign to the value of a variable. -->
+    <blog-post v-bind:post="post"></blog-post>
+  </div>
+</div>
+<script>
+Vue.component('blog-post', {
+  props: ['post', 'likes', 'comment-ids', 'comments'],
+  template: `
+    <div>
+      <h3>{{ post }}</h3>
+      <h3>{{ likes }}</h3>
+      <h5>{{ commentIds }}</h5>
+      <h5>{{ comments }}</h5>
+    </div>
+  `
+})
+Vue.component('base-input', {
+  props: ['favorited'],
+  template: `
+    <h4>{{ currentUserFavorited }}</h4>
+  `
+})
+new Vue({
+  el: '#app-1',
+  data: {
+    post: ''
+  }
+})
+new Vue({
+  el: '#app-2',
+  data: {
+    post: {
+      likes: 7
+    }
+  }
+})
+new Vue({
+  el: '#app-3',
+  data: {
+    favorited: true,
+    post: {
+      currentUserFavorited: false
+    }
+  }
+})
+new Vue({
+  el: '#app-4',
+  data: {
+    post: {
+      commentIds: [ 1, 2, 3 ]
+    }
+  }
+})
+new Vue({
+  el: '#app-5',
+  data: {
+    post: {
+      id: 2,
+      title: 'dynamically assign'
+    }
+  }
+})
+</script>
