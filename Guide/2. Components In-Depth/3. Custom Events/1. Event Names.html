@@ -1,0 +1,41 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app">
+    <p>{{ counter }}</p>
+    <my-component v-on:increment="myEvent"></my-component>
+    <my-component v-on:increment="myEvent"></my-component>ㄴ
+  </div>
+</div>
+<script>
+Vue.component('my-component', {
+  template: `
+    <div>
+      <p>{{ counter }}</p>
+      <button v-on:click="incrementCounter">{{ counter }}</button>
+      <button v-on:click="incrementCounter">{{ counter }}</button>
+    </div>
+  `,
+  data: function() {
+    return {
+      counter: 0
+    }
+  },
+  methods: {
+    incrementCounter: function() {
+      this.counter++
+      this.$emit('increment')
+    }
+  }
+})
+new Vue({
+  el: '#app',
+  data: {
+    counter: 0
+  },
+  methods: {
+    myEvent: function() {
+      this.counter++
+    }
+  }
+})
+</script>
