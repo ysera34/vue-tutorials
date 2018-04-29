@@ -1,0 +1,39 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app">
+    <base-input v-on:focus.native="onFocus"></base-input>
+    <base-input></base-input>
+  </div>
+</div>
+<script>
+Vue.component('base-input', {
+  inheritAttrs: false,
+  props: ['label', 'value'],
+  computed: {
+    inputListeners: function() {
+      var vm = this
+      return Object.assign({},
+        this.$listeners,
+        {
+          input: function(event) {
+            vm.$emit('input', event.target.value)
+          }
+        }
+      )
+    }
+  },
+  template: `
+    <label>
+      {{ label }}
+      <input
+        v-bind="$attrs"
+        v-bind:value="value"
+        v-on="inputListeners"
+      >
+    </label>
+  `
+})
+new Vue({
+  el: '#app'
+})
+</script>
