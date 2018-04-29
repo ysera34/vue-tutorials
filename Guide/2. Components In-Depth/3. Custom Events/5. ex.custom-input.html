@@ -1,0 +1,29 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app">
+    <input v-model="something">
+    <input
+      v-bind:value="something"
+      v-on:input="something = $event.target.value"
+    >
+    <custom-input
+      :value="something"
+      @input="value => { something = value }"
+    >
+    </custom-input>
+  </div>
+</div>
+<script>
+Vue.component('custom-input', {
+  props: ['value'],
+  template: `
+    <input v-bind:value="value">
+  `
+})
+var app = new Vue({
+  el: '#app',
+  data: {
+    something: 'something'
+  }
+})
+</script>
