@@ -1,0 +1,28 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app">
+    <component v-bind:is="currentView"></component>
+
+    <!-- Inactive components will be cached! -->
+    <keep-alive>
+      <component :is="currentView"></component>
+    </keep-alive>
+  </div>
+</div>
+<script>
+  var Home = {
+    template: '<p>Welcome Home!</p>'
+  }
+  var app = new Vue({
+    el: '#app',
+    data: {
+      currentView: 'home',
+      // currentView: Home
+    },
+    components: {
+      home: { template: '<p>Welcome home!</p>' },
+      posts: { template: '<p>Welcome posts!</p>'},
+      archive: { template: '<p>Welcome archive!</p>'}
+    }
+  })
+</script>
