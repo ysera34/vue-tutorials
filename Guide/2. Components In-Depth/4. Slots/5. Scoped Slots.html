@@ -1,0 +1,73 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app-1">
+    <div class="parent">
+      <child>
+        <template slot-scope="props">
+          <span>hello from parent</span>
+          <span>{{ props.text }}</span>
+        </template>
+      </child>
+
+      <!-- Destructuring slot-scope -->
+      <child>
+        <template slot-scope="{ text }">
+          <span>hello from parent</span>
+          <span>{{ text }}</span>
+        </template>
+      </child>
+    </div>
+  </div>
+
+  <div id="app-2">
+    <my-awesome-list :items="items">
+      <!-- A scoped slot can also have a name. -->
+      <li
+        slot="item"
+        slot-scope="props"
+        class="my-fancy-item"
+      >
+        {{ props.text }}
+      </li>
+    </my-awesome-list>
+  </div>
+</div>
+<script>
+  Vue.component('child', {
+    template: `
+      <div class="child">
+        <slot text="hello from child"></slot>
+      </div>
+    `
+  })
+  new Vue({
+    el: '#app-1'
+  })
+  Vue.component('my-awesome-list', {
+    template: `
+      <ul>
+        <slot name="item"
+          v-for="item in items"
+          :text="item.text"
+        >
+          Alternative content is here.
+        </slot>
+      </ul>
+    `,
+    data: function() {
+      return {
+        items: [
+          { text: 'Foo' },
+          { text: 'Bar' }
+        ]
+      }
+    }
+  })
+  new Vue({
+    el: '#app-2',
+    data: {
+      items: []
+    }
+  })
+
+</script>
