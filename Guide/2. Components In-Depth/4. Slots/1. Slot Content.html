@@ -1,0 +1,30 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app">
+    <h1>Parent Component Title</h1>
+    <my-component>
+      <p>This is the original content.</p>
+      <p>This is the original extra content.</p>
+    </my-component>
+
+    <h1>Parent Component Title</h1>
+    <my-component>
+      
+    </my-component>
+  </div>
+</div>
+<script>
+  Vue.component('my-component', {
+    template: `
+      <div>
+        <h2>Child Component Title</h2>
+        <slot>
+          You will only be able to see it if there is no content provided.
+        </slot>
+      </div>
+    `
+  })
+  new Vue({
+    el: '#app'
+  })
+</script>
