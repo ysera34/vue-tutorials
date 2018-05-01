@@ -1,0 +1,66 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app-1">
+    <p>{{ foo }}</p>
+    <p>{{ bar }}</p>
+    <p>{{ baz() }}</p>
+    <child-component></child-component>
+  </div>
+  <div id="app-2">
+    <user-profile
+      v-bind:user="user"
+      ref="profile"
+    >
+    </user-profile>
+  </div>
+</div>
+<script>
+  Vue.component('child-component', {
+    template: `
+      <div>
+        <p>{{ this.$root.foo }}</p>
+        <p>{{ this.$root.foo = 2 }}</p>
+        <p>{{ this.$root.bar }}</p>
+        <p>{{ this.$root.baz() }}</p>
+      </div>
+    `
+  })
+
+  // The root Vue instance
+  var app1 = new Vue({
+    el: '#app-1',
+    data: {
+      foo: 1
+    },
+    computed: {
+      bar: function() {
+        return 'bar'
+      }
+    },
+    methods: {
+      baz: function() {
+        return 'baz'
+      }
+    }
+  })
+
+  Vue.component('user-profile', {
+    props: ['user'],
+    template: `
+      <div>
+        <p>{{ user.name }}</p>
+        <p>{{ user.age }}</p>
+      </div>
+    `
+  })
+
+  var app2 = new Vue({
+    el: '#app-2',
+    data: {
+      user: {
+        name: 'user-name',
+        age: 'user-age'
+      }
+    }
+  })
+</script>
