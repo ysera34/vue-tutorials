@@ -1,0 +1,46 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app">
+    <app-layout>
+      <h1 slot="header">Here might be a page title.</h1>
+
+      <p>A paragraph for the main content.</p>
+      <p>And Another one.</p>
+
+      <p slot="footer">Here's some contact information.</p>
+    </app-layout>
+
+    <app-layout>
+      <template slot="header">
+        <h1>Here might be a page title.</h1>
+      </template>
+
+      <p>A paragraph for the main content.</p>
+      <p>And Another one.</p>
+
+      <template slot="footer">
+        <p>Here's some contact information.</p>
+      </template>
+    </app-layout>
+  </div>
+</div>
+<script>
+  Vue.component('app-layout', {
+    template: `
+      <div class="container">
+        <header>
+          <slot name="header"></slot>
+        </header>
+        <main>
+          <slot></slot>
+        </main>
+        <footer>
+          <slot name="footer"></slot>
+        </footer>
+      </div>
+    `
+  })
+  new Vue({
+    el: '#app'
+  })
+</script>
