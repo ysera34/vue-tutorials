@@ -1,0 +1,40 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app">
+    <unique-name-of-my-component
+      v-bind:item="item"
+      v-bind:is-visible="isVisible"
+    >
+    </unique-name-of-my-component>
+  </div>
+</div>
+<script>
+  Vue.component('unique-name-of-my-component', {
+    name: 'stack-overflow',
+    props: ['item', 'isVisible'],
+    template: `
+      <div>
+        <stack-overflow
+          v-if="isVisible"
+          v-bind:item="item"
+        >
+        </stack-overflow>
+        <p>{{ item.number }}</p>
+      </div>
+    `
+  })
+  var app = new Vue({
+    el: '#app',
+    data: {
+      item: {
+        number: 0
+      }
+    },
+    computed: {
+      isVisible: function() {
+        this.item.number++
+        return this.item.number < 3
+      }
+    }
+  })
+</script>
