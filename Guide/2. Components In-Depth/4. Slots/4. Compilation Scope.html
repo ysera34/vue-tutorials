@@ -1,0 +1,29 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app">
+    <!-- It does not work -->
+    <!-- <child-component v-show="someChildProperty"></child-component> -->
+
+    <child-component v-show="vueInstanceProperty"></child-component>
+
+    <child-component></child-component>
+  </div>
+</div>
+<script>
+  Vue.component('child-component', {
+    template: `
+      <div v-show="someChildProperty">Child</div>
+    `,
+    data: function() {
+      return {
+        someChildProperty: true
+      }
+    }
+  })
+  new Vue({
+    el: '#app',
+    data : {
+      vueInstanceProperty: true
+    }
+  })
+</script>
