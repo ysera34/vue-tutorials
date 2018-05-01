@@ -1,0 +1,56 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app">
+    <async-component></async-component>
+  </div>
+</div>
+<script>
+  Vue.component('async-component', function(resolve, reject) {
+    setTimeout(function() {
+      // Pass the component definition to the resolve callback
+      resolve({
+        template: '<div>I am async!</div>'
+      })
+    }, 1000)
+  })
+
+  // use async components together with Webpack’s code-splitting feature
+  Vue.component('async-webpack-component', function(resolve) {
+    // This special require syntax will instruct Webpack to
+    // automatically split your built code into bundles which
+    // are loaded over Ajax requests.
+    require(['./my-async-component'], resolve)
+  })
+
+  // return a Promise in the factory function
+  Vue.component(
+    'async-webpack-component',
+    // The `import` function returns a Promise.
+    // () => import('./my-async-component')
+  )
+
+  var app = new Vue({
+    el: '#app',
+
+     // local registration
+     components: {
+       'my-component' : () => import('./my-async-component')
+     }
+
+  })
+
+  // Handling Loading State
+  const AsyncComponent = () => ({
+    // The component to load (should be a Promise)
+    component: import('./MyComponent.vue'),
+    // A component to use while the async component is loading
+    loading: LoadingComponent,
+    // A component to use if the load fails
+    error: ErrorComponent,
+    // Delay before showing the loading component. Default: 200ms.
+    delay: 200,
+    // The error component will be displayed if a timeout is
+    // provided and exceeded. Default: Infinity.
+    timeout: 3000
+  })
+</script>
