@@ -1,0 +1,50 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+
+</div>
+<script>
+  var mixin = {
+    created: function() {
+      console.log('mixin hook called')
+    },
+    methods: {
+      foo: function() {
+        console.log('foo')
+      },
+      conflicting: function() {
+        console.log('from mixin')
+      }
+    },
+    data: function() {
+      return {
+        message: 'hello',
+        foo: 'abc'
+      }
+    }
+  }
+
+  new Vue({
+    mixins: [mixin],
+    created: function() {
+      console.log('component hook called')
+      console.log(this.$data)
+    },
+    methods: {
+      bar: function() {
+
+      },
+      conflicting: function() {
+        console.log('from self')
+      }
+    },
+    data: function() {
+      return {
+        message: 'goodbye',
+        bar: 'def'
+      }
+    }
+  })
+
+  // => "mixin hook called"
+  // => "component hook called"
+</script>
