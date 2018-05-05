@@ -1,0 +1,28 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div
+    id="app"
+    v-color-swatch="color"
+    v-height-swatch="height"
+  >
+  </div>
+</div>
+<script>
+  Vue.directive('color-swatch', {
+    bind: function(el, binding) {
+      el.style.backgroundColor = binding.value
+    }
+  })
+  // In many cases, you may want the same behavior on `bind` and `update`
+  // but, don't care about the other hooks.
+  Vue.directive('height-swatch', function(el, binding) {
+    el.style.height = binding.value
+  })
+  new Vue({
+    el: '#app',
+    data: {
+      color: 'black',
+      height: '100px'
+    }
+  })
+</script>
