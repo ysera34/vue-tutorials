@@ -1,0 +1,20 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app">
+    <div v-demo="{ color: 'white', text: 'hello!' }"></div>
+  </div>
+</div>
+<script>
+  Vue.directive('demo', function(el, binding) {
+    console.log(binding.value)
+    console.log(binding.value.color)
+    console.log(binding.value.text)
+  })
+  new Vue({
+    el: '#app',
+    data : {
+      color: 'black',
+      text: 'goodbye!'
+    }
+  })
+</script>
