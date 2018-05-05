@@ -1,0 +1,36 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app-1">
+    <input type="text" v-global-focus>
+    <input type="text" v-global-focus>
+  </div>
+  <div id="app-2">
+    <input type="text" v-local-focus>
+  </div>
+</div>
+<script>
+  // Register a global custom directive called `v-focus`
+  Vue.directive('global-focus', {
+    // When the bound element is inserted into the DOM...
+    inserted: function(el) {
+      // Focus the element
+      el.focus()
+    }
+  })
+
+  new Vue({
+    el: '#app-1'
+  })
+  new Vue({
+    el: '#app-2',
+    // Register a directive locally
+    directives: {
+      localFocus: {
+        // directive definition
+        inserted: function(el) {
+          el.focus()
+        }
+      }
+    }
+  })
+</script>
