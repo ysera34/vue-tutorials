@@ -18,12 +18,12 @@
     data: function() {
       return {
         message: 'hello',
-        foo: 'abc'
+        // foo: 'abc'
       }
     }
   }
 
-  new Vue({
+  var vm = new Vue({
     mixins: [mixin],
     created: function() {
       console.log('component hook called')
@@ -31,7 +31,7 @@
     },
     methods: {
       bar: function() {
-
+        console.log('bar')
       },
       conflicting: function() {
         console.log('from self')
@@ -40,11 +40,15 @@
     data: function() {
       return {
         message: 'goodbye',
-        bar: 'def'
+        // bar: 'def'
       }
     }
   })
 
   // => "mixin hook called"
   // => "component hook called"
+
+  vm.foo() // => "foo"
+  vm.bar() // => "bar"
+  vm.conflicting() // => "from self"
 </script>

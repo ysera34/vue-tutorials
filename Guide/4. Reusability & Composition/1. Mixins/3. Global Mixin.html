@@ -1,0 +1,21 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+
+</div>
+<script>
+  // inject a handler for `myOption` custom option
+  // Vue instance option
+  Vue.mixin({
+    created: function() {
+      var myOption = this.$options.myOption
+      if (myOption) {
+        console.log(myOption)
+      }
+    }
+  })
+
+  new Vue({
+    myOption: 'hello',
+  })
+  // => 'hello'
+</script>
