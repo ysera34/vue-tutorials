@@ -1,0 +1,25 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app" v-demo:foo.a.b="message"></div>
+</div>
+<script>
+  Vue.directive('demo', {
+    bind: function(el, binding, vnode) {
+      var s = JSON.stringify
+      el.innerHTML =
+        'name: ' + s(binding.name) + '<br>' +
+        'value: ' + s(binding.value) + '<br>' +
+        'expression: ' + s(binding.expression) + '<br>' +
+        'argument: ' + s(binding.arg) + '<br>' +
+        'modifiers:' + s(binding.modifiers) + '<br>' +
+        'vnode keys:' + Object.keys(vnode).join(', ')
+    }
+  })
+
+  new Vue({
+    el: '#app',
+    data: {
+      message: 'hello!'
+    }
+  })
+</script>
