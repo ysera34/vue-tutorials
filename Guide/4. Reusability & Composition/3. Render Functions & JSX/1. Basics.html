@@ -1,0 +1,68 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app">
+    <anchored-heading-x :level="1">Hello world!</anchored-heading-x>
+    <anchored-heading-x :level="2">Hello world!</anchored-heading-x>
+    <anchored-heading-x :level="3">Hello world!</anchored-heading-x>
+    <anchored-heading-x :level="4">Hello world!</anchored-heading-x>
+    <anchored-heading-x :level="5">Hello world!</anchored-heading-x>
+    <anchored-heading-x :level="6">Hello world!</anchored-heading-x>
+
+    <anchored-heading-r :level="1">Hello world!</anchored-heading-r>
+    <anchored-heading-r :level="2">Hello world!</anchored-heading-r>
+    <anchored-heading-r :level="3">Hello world!</anchored-heading-r>
+    <anchored-heading-r :level="4">Hello world!</anchored-heading-r>
+    <anchored-heading-r :level="5">Hello world!</anchored-heading-r>
+    <anchored-heading-r :level="6">Hello world!</anchored-heading-r>
+  </div>
+</div>
+<script type="text/x-template" id="anchored-heading-template">
+  <h1 v-if="level === 1">
+    <slot></slot>
+  </h1>
+  <h2 v-else-if="level === 2">
+    <slot></slot>
+  </h2>
+  <h3 v-else-if="level === 3">
+    <slot></slot>
+  </h3>
+  <h4 v-else-if="level === 4">
+    <slot></slot>
+  </h4>
+  <h5 v-else-if="level === 5">
+    <slot></slot>
+  </h5>
+  <h6 v-else-if="level === 6">
+    <slot></slot>
+  </h6>
+</script>
+<script>
+  Vue.component('anchored-heading-x', {
+    template: '#anchored-heading-template',
+    props: {
+      level: {
+        type: Number,
+        required: true
+      }
+    }
+  })
+
+  Vue.component('anchored-heading-r', {
+    render: function(createElement) {
+      return createElement(
+        'h' + this.level,   // tag name
+        this.$slots.default // array of children
+      )
+    },
+    props: {
+      level: {
+        type: Number,
+        required: true
+      }
+    }
+  })
+
+  new Vue({
+    el: '#app'
+  })
+</script>
