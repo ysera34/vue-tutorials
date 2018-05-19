@@ -1,0 +1,42 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app">
+
+  </div>
+</div>
+<script>
+  Vue.component('render-component-1', {
+    render: function(createElement) {
+      // `<div><slot></slot></div>`
+      return createElement('div', this.$slot.default)
+    }
+  })
+  Vue.component('render-component-2', {
+    render: function(createElement) {
+      // `<div><slot :text="msg"></slot></div>`
+      return createElement('div', [
+        this.$scopedSlots.default({
+          text: this.msg
+        })
+      ])
+    }
+  })
+  Vue.component('render-component-3', {
+    render: function(createElement) {
+      return createElement('div', [
+        createElement('child', {
+          // pass `scopedSlots` in the data object
+          // in the form of { name: props => VNode | Array<VNode> }
+          scopedSlots: {
+            default: function(props) {
+              return createElement('span', props.text)
+            }
+          }
+        })
+      ])
+    }
+  })
+  var app = new Vue({
+    el: '#app'
+  })
+</script>
