@@ -1,0 +1,35 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <div id="app">
+    <input-plain-event></input-plain-event>
+  </div>
+</div>
+<script>
+  Vue.component('input-plain-event', {
+    render: function(createElement) {
+      return createElement('input', {
+        on: {
+          keyup: function(event) {
+            // Abort if the element emitting the event is not
+            // the element the event is bound to
+            if (!event.target !== event.currentTarget) return
+
+            // Abort if the key that went up is not the enter
+            // key (13) and the shift key was not held down
+            // at the same time
+            if (!event.shiftKey || event.keyCode !== 13) return
+
+            // Stop event propagation
+            event.stopPropagation()
+
+            // Prevent the default keyup handler for this element
+            event.preventDefault()
+          }
+        }
+      })
+    }
+  })
+  var app = new Vue({
+    el: '#app'
+  })
+</script>
