@@ -1,0 +1,46 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+
+</div>
+<script>
+  MyPlugin.install = function(Vue, options) {
+    // 1. add global method or property
+    Vue.myGlobalMethod = function() {
+      // something logic ...
+    }
+
+    // 2. add a global asset
+    Vue.directive('my-directive', {
+      bind(el, binding, vnode, oldVnode) {
+        // something logic ...
+      }
+      // ...
+    })
+
+    // 3. inject some component options
+    Vue.mixin({
+      created: function() {
+        // something logic ...
+      }
+      // ...
+    })
+
+    // 4. add an instance method
+    Vue.prototype.$myMethod = function(methodOptions) {
+      // something logic ...
+    }
+  }
+
+  // calls `MyPlugin.install(Vue)`
+  Vue.use(MyPlugin)
+
+  // can optionally pass in some options
+  Vue.use(MyPlugin, { someOption: true })
+
+  // When using CommonJS via Browerify or Webpack
+  var Vue = require('vue')
+  var VueRouter = require('vue-router')
+
+  // Don't forget to call this
+  Vue.use(VueRouter)
+</script>
