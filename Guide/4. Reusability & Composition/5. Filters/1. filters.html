@@ -1,0 +1,67 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+
+  <!-- in mustaches -->
+  <!-- {{ message | capitalize }} -->
+
+  <!-- in v-bind -->
+  <!-- <div v-bind:id="rawId | formatId"></div> -->
+
+  <div id="app-1">
+    <my-filtered-component></my-filtered-component>
+  </div>
+
+  <div id="app-2">
+    <input v-model="value">
+    <p>{{ value | capitalize }}</p>
+  </div>
+
+  <!-- filters can be chained -->
+  <!-- {{ message | filterA | filterB }} -->
+
+  <!-- filters are javascript functions, therefore they can take arguments. -->
+  <!-- {{ message | filterA('arg1', arg2) }} -->
+  <!-- 1. filterA is defined as a function taking three arguments. -->
+  <!-- 2. The value of message will be passed into the first argument. -->
+  <!-- 3. The plain string 'arg1' will be passed into the filterA as its second arguments. -->
+  <!-- 4. The value of expression 'arg2' will be evaluated and passed in as the third argument. -->
+</div>
+<script>
+  // define local filters in a component's options
+  Vue.component('my-filtered-component', {
+    template: `
+      <div>
+        <input
+          v-bind:value="value"
+          v-on:input="value = $event.target.value"
+        />
+        <p>{{ value | capitalize }}</p>
+      </div>
+    `,
+    props: ['value'],
+    filters: {
+      capitalize: function(value) {
+        if (!value) return ''
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1)
+      }
+    }
+  })
+
+  new Vue({
+    el: '#app-1'
+  })
+
+  Vue.filter('capitalize', function(value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.charAt(1).toUpperCase() + value.slice(1)
+  })
+
+  new Vue({
+    el: '#app-2',
+    data: {
+      value: ''
+    }
+  })
+</script>
