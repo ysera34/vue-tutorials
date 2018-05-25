@@ -1,0 +1,27 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<style>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+</style>
+<div>
+  <div id="app-1">
+    <button v-on:click="show = !show">
+      Toggle
+    </button>
+    <transition name="fade">
+      <p v-if="show">hello</p>
+    </transition>
+  </div>
+</div>
+<script>
+  new Vue({
+    el: '#app-1',
+    data: {
+      show: true
+    }
+  })
+</script>
