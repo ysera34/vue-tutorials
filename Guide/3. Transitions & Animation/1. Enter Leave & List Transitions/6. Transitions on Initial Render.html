@@ -1,0 +1,31 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+  <!-- apply a transition on the initial render -->
+  <transition appear>
+    <!--  -->
+  </transition>
+
+  <!-- can also specify custom CSS classes -->
+  <transition
+    appear
+    appear-class="custom-appear-class"
+    appear-to-class="custom-appear-to-class"
+    appear-active-class="custom-appear-active-class"
+  >
+    <!--  -->
+  </transition>
+
+  <!-- custom JavaScript hooks -->
+  <transition
+    appear
+    v-on:before-appear="customBeforeAppearHook"
+    v-on:appear="customAppearHook"
+    v-on:after-appear="customAfterAppearHook"
+    v-on:appear-cancelled="customAppearCancelledHook"
+  >
+    <!--  -->
+  </transition>
+</div>
+<script>
+
+</script>
