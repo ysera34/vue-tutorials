@@ -1,0 +1,49 @@
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+<div>
+
+</div>
+<script>
+  // template components
+  Vue.component('my-special-transition-1', {
+    template: `
+      <transition
+        name="very-special-transition"
+        mode="out-in"
+        v-on:before-enter="beforeEnter"
+        v-on:after-enter="afterEnter"
+      >
+        <slot></slot>
+      </transition>
+    `,
+    methods: {
+      beforeEnter: function(el) {
+
+      },
+      afterEnter: function(el) {
+
+      }
+    }
+  })
+  
+  // functional components
+  Vue.component('my-special-transition-2', {
+    functional: true,
+    render: function(createElement, context) {
+      var data = {
+        props: {
+          name: 'very-special-transition',
+          mode: 'out-in'
+        },
+        on: {
+          beforeEnter: function(el) {
+
+          },
+          afterEnter: function(el) {
+
+          }
+        }
+      }
+      return createElement('transition', data, context.children)
+    }
+  })
+</script>
